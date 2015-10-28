@@ -23,9 +23,16 @@ shapes.at.stop <- inner_join(trip.id.test,trips,by="trip_id") %>%
 shape.data.at.stop <- shapes %>% filter(shape_id == shapes.at.stop$shape_id)
 
 # Generate base map
-myMap <- get_map(location=myLocation, source="stamen",maptype="watercolor",crop=FALSE)
+myMap <- get_map(location=c(lon=-84.39,lat=33.76), 
+                 zoom=11, source="google", maptype="roadmap", 
+                 crop=FALSE)
 
 # Create Map of points, using data from shape.data.at.stop
 ggmap(myMap) + geom_point(data=shape.data.at.stop, 
                           aes(x=shape_pt_lon,y=shape_pt_lat), 
-                          color="darkred", size=1)
+                          color="red", size=2) +
+     ggtitle(paste("All routes connecting to \nStop ID ",
+                   stop.id.test,
+                   ": ",
+                   stops$stop_name[stops$stop_id==stop.id.test],
+                   sep=""))
