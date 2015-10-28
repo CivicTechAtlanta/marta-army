@@ -1,8 +1,12 @@
-# Get a single shape id lat/lon, and plot it on a map of Atlanta
+# map_sop_id.R: Get a single shape id lat/lon, and plot it on a map of Atlanta
+
 library(dplyr)
 library(ggmap)
 
-#Select a test stop ID
+# Run script to grab GTFS data and load into R environment
+source("get_ATL_GTFS_data.R")
+
+# Enter a test stop ID
 stop.id.test <- 101080
 
 # Find all outgoing routes
